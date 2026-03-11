@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 from datetime import datetime
+import atexit
 
 app = Flask(__name__)
+_periodo_id = None
 DB_PATH = "InspeccionManual.db"
 
 # Mapeo de botones agrupado por Pieza (columna visual en la imagen)
@@ -23,14 +25,14 @@ BUTTON_MAP = {
 
 DEFECTOS = [
     "Splatter",
+    "Busbar Desoldada",
     "Gap",
     "Terminal Perforada",
     "Busbar Perforada",
     "MetalFlake",
-    "Busbar desalineada",
+    "Busbar Desalineada",
     "Terminal/Kostal Desalineada",
-    "Faltante de busbar",
-    "Faltante de Terminal/Kostal",
+    "Faltante de Busbar/Terminal",
     "Weld projection sin derretir",
 ]
 
@@ -48,6 +50,35 @@ def init_db():
             defecto TEXT NOT NULL
         )
     """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Periodos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            inicio TEXT NOT NULL,
+            fin TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+
+def iniciar_periodo():
+    global _periodo_id
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    inicio = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    cursor.execute("INSERT INTO Periodos (inicio) VALUES (?)", (inicio,))
+    conn.commit()
+    _periodo_id = cursor.lastrowid
+    conn.close()
+
+
+def cerrar_periodo():
+    if _periodo_id is None:
+        return
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    fin = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    cursor.execute("UPDATE Periodos SET fin = ? WHERE id = ?", (fin, _periodo_id))
     conn.commit()
     conn.close()
 
@@ -131,4 +162,6 @@ def historial():
 
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    iniciar_periodo()
+    atexit.register(cerrar_periodo)
+    app.run(debug=True, use_reloader=False)
