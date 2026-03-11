@@ -1,13 +1,13 @@
-# Etiquetador TE — Guía de instalación en Windows
+# Guía de instalación del etiquetador en Windows
 
 ## Requisitos previos
 
 - **Python 3.10 o superior**
-  Descargalo desde [https://www.python.org/downloads/](https://www.python.org/downloads/).
+  Se descarga desde [https://www.python.org/downloads/](https://www.python.org/downloads/).
   Durante la instalación, marcá la opción **"Add Python to PATH"** antes de continuar.
 
 - **Git** (opcional, para clonar el repositorio)
-  Descargalo desde [https://git-scm.com/download/win](https://git-scm.com/download/win).
+  Se descarga desde [https://git-scm.com/download/win](https://git-scm.com/download/win).
 
 ---
 
@@ -22,17 +22,19 @@ cd etiquetador_te
 ```
 
 **Opción B — Sin Git:**
-Descargá el archivo ZIP del proyecto, descomprimilo y abrí la carpeta `etiquetador_te`.
+Descargue el archivo ZIP del proyecto, descomprimalo y abra la carpeta `etiquetador_te`.
 
 ---
 
 ### 2. Abrir una terminal en la carpeta del proyecto
 
-Navegá hasta la carpeta `etiquetador_te` en el Explorador de archivos, hacé clic derecho dentro de la carpeta y elegí **"Abrir en Terminal"** (o **"Abrir ventana de PowerShell aquí"**).
+Navegue hasta la carpeta `etiquetador_te` en el Explorador de archivos, haga clic derecho dentro de la carpeta y elija **"Abrir en Terminal"** (o **"Abrir ventana de PowerShell aquí"**).
 
 ---
 
 ### 3. Crear un entorno virtual
+
+Ejecute el siguiente comando en terminal:
 
 ```
 python -m venv venv
@@ -46,7 +48,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-Vas a ver `(venv)` al inicio de la línea de la terminal cuando esté activo.
+Va a ver `(venv)` al inicio de la línea de la terminal cuando esté activo.
 
 ---
 
@@ -74,7 +76,7 @@ La terminal mostrará algo como:
 
 ### 7. Acceder a la aplicación
 
-Abrí un navegador (Chrome, Edge, etc.) y entrá a:
+Abra un navegador (Chrome, Edge, etc.) y entre a:
 
 ```
 http://127.0.0.1:5000
@@ -106,7 +108,7 @@ La base de datos contiene dos tablas:
 
 ## Detener el programa
 
-Presioná `Ctrl + C` en la terminal para cerrar el servidor. El periodo de sesión quedará registrado automáticamente con su hora de cierre.
+Presione `Ctrl + C` en la terminal para cerrar el servidor. El periodo de sesión quedará registrado automáticamente con su hora de cierre.
 
 ---
 
@@ -114,6 +116,6 @@ Presioná `Ctrl + C` en la terminal para cerrar el servidor. El periodo de sesi�
 
 | Problema | Solución |
 |---|---|
-| `'python' no se reconoce como comando` | Reinstalá Python marcando **"Add Python to PATH"**. |
-| `No module named flask` | Asegurate de haber activado el entorno virtual antes de instalar (`venv\Scripts\activate`). |
-| El puerto 5000 está ocupado | Cerrá otras aplicaciones que usen ese puerto o cambiá el puerto en la última línea de `app.py`: `app.run(port=5001)`. |
+| `'python' no se reconoce como comando` | Reinstale Python marcando **"Add Python to PATH"**. |
+| `No module named flask` | Asegurese de haber activado el entorno virtual antes de realizar (`venv\Scripts\activate`). |
+| El puerto 5000 está ocupado | Cierre otras aplicaciones que usen ese puerto o cambie el puerto en la última línea de `app.py`: `app.run(port=5001)`. |
