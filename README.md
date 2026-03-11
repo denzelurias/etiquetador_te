@@ -17,7 +17,7 @@
 
 **Opción A — Con Git:**
 ```
-git clone <URL_del_repositorio>
+git clone <https://github.com/denzelurias/etiquetador_te>
 cd etiquetador_te
 ```
 
